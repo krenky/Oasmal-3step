@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace Oasmal_3step
 {
@@ -23,6 +24,22 @@ namespace Oasmal_3step
         public MainWindow()
         {
             InitializeComponent();
+            DataOrders.ItemsSource = Orders;
+        }
+        Shop shop = new Shop(10);
+        ObservableCollection<Order> Orders = new ObservableCollection<Order>();
+        
+        private void AddOrder_Click(object sender, RoutedEventArgs e)
+        {
+            Order order = new Order(TextBoxName.Text);
+            shop.AddOrder(order);
+            Orders.Add(order);
+        }
+
+        private void DelOrder_Click(object sender, RoutedEventArgs e)
+        {
+            Order order = DataOrders.SelectedItem as Order;
+            Orders.Remove(order);
         }
     }
 }
