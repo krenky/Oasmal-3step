@@ -1,6 +1,6 @@
-﻿using Osmakov_Course_work;
-using System;
+﻿using System;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace Oasmal_3step
 
@@ -179,7 +179,6 @@ namespace Oasmal_3step
             return orderData;
         }
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected void OnPropertyChanged(string propertyName)
         {
             var handler = PropertyChanged;
@@ -187,6 +186,17 @@ namespace Oasmal_3step
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+        public ObservableCollection<Product> GetProduct()
+        {
+            Product products = head.Next;
+            ObservableCollection<Product> productsCollection = new ObservableCollection<Product>();
+            while(products != null)
+            {
+                productsCollection.Add(products);
+                products = products.Next;
+            }
+            return productsCollection;
         }
     }
 }

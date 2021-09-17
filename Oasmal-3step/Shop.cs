@@ -69,6 +69,17 @@ namespace Oasmal_3step
             }
             return -1;
         }
+        public Order FindOrder(Order order) // Поиск заказа
+        {
+            for (int i = 0; i < OrderCount; i++) // проход по массиву
+            {
+                if (orderArray[i].LastName == order.LastName)// если имена совпали 
+                {
+                    return orderArray[i]; // вовращаем 
+                }
+            }
+            return null;
+        }
         public int ShopSum() // Подсчет суммы 
         {
             int shopSum = 0;
