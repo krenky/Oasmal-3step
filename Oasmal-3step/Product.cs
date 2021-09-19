@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections;
+using System.ComponentModel;
 
 namespace Oasmal_3step
 {
@@ -50,5 +51,15 @@ namespace Oasmal_3step
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        //public IEnumerator GetEnumerator()
+        //{
+        //    Product product = this;
+        //    while(product != null)
+        //    {
+        //        yield return product;
+        //        product = product.Next;
+        //    }
+        //}
     }
 }

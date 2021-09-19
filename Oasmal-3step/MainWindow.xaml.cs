@@ -79,5 +79,30 @@ namespace Oasmal_3step
                     }
             }
         }
+
+        private async void LoadFile_ClickAsync(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if ((bool)openFileDialog.ShowDialog())
+                using (FileStream fs = (FileStream)openFileDialog.OpenFile())
+                {
+                    //_Enterprises
+                    ObservableCollection<Order> orders = await JsonSerializer.DeserializeAsync<ObservableCollection<Order>>(fs);
+                    shop = new Shop(10);
+                    foreach (var i in orders)
+                    {
+                        Order order = new Order(i.LastName);
+                        shop.AddOrder(order);
+                        Orders.Add(order);
+                        Product product = i.Head.Next;
+                        while(product != null)
+                        {
+                            order.AddProduct(product.Name, product.Price);
+                            product = product.Next;
+                        }
+                    }
+                }
+
+        }
     }
 }
