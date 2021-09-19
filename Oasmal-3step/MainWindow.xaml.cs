@@ -49,8 +49,11 @@ namespace Oasmal_3step
 
         private void DataOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Order order = shop.FindOrder(DataOrders.SelectedItem as Order);
-            DataProducts.ItemsSource = order?.GetProduct();
+            if (DataOrders.SelectedItem != null)
+            {
+                Order order = shop.FindOrder(DataOrders.SelectedItem as Order);
+                DataProducts.ItemsSource = order?.GetProduct();
+            }
         }
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)
