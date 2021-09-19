@@ -49,7 +49,7 @@ namespace Oasmal_3step
                 OnPropertyChanged("Head");
             }
         } // заголовок 
-        private Product Last
+        public Product Last
         {
             get { return last; }
             set
@@ -58,7 +58,7 @@ namespace Oasmal_3step
                 OnPropertyChanged("Last");
             }
         } // указатель на последний заказ
-        private Product Prev
+        public Product Prev
         {
             get { return prev; }
             set

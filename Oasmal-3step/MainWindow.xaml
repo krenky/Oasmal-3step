@@ -22,8 +22,8 @@
         <TextBox x:Name="TextBoxName" HorizontalAlignment="Left" Margin="10,220,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="TextBoxProduct" HorizontalAlignment="Left" Margin="10,243,0,0" Text="Product" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="TextBoxPriceProduct" HorizontalAlignment="Left" Margin="10,266,0,0" Text="price product" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="SaveFile" Content="Сохранить" Margin="0,150,0,0" VerticalAlignment="Top" Width="Auto" Height="30" Click="SaveFile_Click"/>
-        <Button x:Name="LoadFile" Content="Загрузить" Margin="0,185,0,0" VerticalAlignment="Top" Width="Auto" Height="30"/>
+        <Button Content="Button" Margin="0,150,0,0" VerticalAlignment="Top" Width="Auto" Height="30"/>
+        <Button Content="Button" Margin="0,185,0,0" VerticalAlignment="Top" Width="Auto" Height="30"/>
 
     </Grid>
 </Window>

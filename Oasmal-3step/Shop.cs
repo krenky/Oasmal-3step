@@ -6,18 +6,25 @@ namespace Oasmal_3step
         public int OrderCount { get; set; } // счетчик заказов 
         private Order[] orderArray; // массива заказов 
         public int ArraySize { get; set; } // размер массива
-        internal Order[] OrderArray { get => orderArray; set => orderArray = value; }
-
         public Shop(int arraysize) // конструктор
         {
             OrderCount = 0;
             ArraySize = arraysize;
-            OrderArray = new Order[ArraySize]; // создание массива
+            SetOrderArray(new Order[ArraySize]); // создание массива
+        }
+        public Order[] GetOrderArray() // получить массив
+        {
+            return orderArray;
+        }
+
+        public void SetOrderArray(Order[] value) // изменить массив
+        {
+            orderArray = value;
         }
         public bool AddOrder(string lastName) // добавление заказа 
         {
             Order order = new Order(lastName); // создание заказа
-            OrderArray[OrderCount] = order; // добавление заказа в конец
+            orderArray[OrderCount] = order; // добавление заказа в конец
             OrderCount++; // увеличение счетчика
             if (OrderCount == ArraySize) // если массив заполнен
             {
@@ -29,7 +36,7 @@ namespace Oasmal_3step
         }
         public bool AddOrder(Order order) // добавление заказа 
         {
-            OrderArray[OrderCount] = order; // добавление заказа в конец
+            orderArray[OrderCount] = order; // добавление заказа в конец
             OrderCount++; // увеличение счетчика
             if (OrderCount == ArraySize) // если массив заполнен
             {
@@ -43,9 +50,9 @@ namespace Oasmal_3step
         {
             if (OrderCount != 0) // если массив не пуст
             {
-                OrderArray[0] = null; // удаление заказа из начала
+                orderArray[0] = null; // удаление заказа из начала
                 for (int i = 1; i < OrderCount; i++) // сдвиг
-                    OrderArray[i - 1] = OrderArray[i];
+                    orderArray[i - 1] = orderArray[i];
                 OrderCount--; // уменьшение счетчика
                 return true;
             }
@@ -55,7 +62,7 @@ namespace Oasmal_3step
         {
             for (int i = 0; i < OrderCount; i++) // проход по массиву
             {
-                if (OrderArray[i].LastName == lastName)// если имена совпали 
+                if (orderArray[i].LastName == lastName)// если имена совпали 
                 {
                     return i; // вовращаем индекс 
                 }
@@ -66,9 +73,9 @@ namespace Oasmal_3step
         {
             for (int i = 0; i < OrderCount; i++) // проход по массиву
             {
-                if (OrderArray[i].LastName == order.LastName)// если имена совпали 
+                if (orderArray[i].LastName == order.LastName)// если имена совпали 
                 {
-                    return OrderArray[i]; // вовращаем 
+                    return orderArray[i]; // вовращаем 
                 }
             }
             return null;
@@ -78,7 +85,7 @@ namespace Oasmal_3step
             int shopSum = 0;
             for (int i = 0; i < OrderCount; i++) // проход по массиву с подсчетом суммы
             {
-                shopSum += OrderArray[i].OrderSum();
+                shopSum += orderArray[i].OrderSum();
             }
             return shopSum;
         }
@@ -87,7 +94,7 @@ namespace Oasmal_3step
             string data = null;
             for (int i = 0; i < OrderCount; i++) // проход по массиву с выводом информации
             {
-                data += OrderArray[i].LastName + "    " + OrderArray[i].Date + "    " + OrderArray[i].ProductCount + "\n";
+                data += orderArray[i].LastName + "    " + orderArray[i].Date + "    " + orderArray[i].ProductCount + "\n";
             }
             return data;
         }

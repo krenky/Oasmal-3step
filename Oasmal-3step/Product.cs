@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Oasmal_3step
 {
-    class Product : INotifyPropertyChanged, IEnumerable
+    class Product : INotifyPropertyChanged
     {
         string name;
         int price;
@@ -49,15 +48,6 @@ namespace Oasmal_3step
             if (handler != null)
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        public IEnumerator GetEnumerator()
-        {
-            Product product = next;
-            while (product != null)
-            {
-                yield return product;
             }
         }
     }
