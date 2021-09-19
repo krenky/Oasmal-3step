@@ -49,32 +49,14 @@ namespace Oasmal_3step
                 OnPropertyChanged("Head");
             }
         } // заголовок 
-        public Product Last
-        {
-            get { return last; }
-            set
-            {
-                last = value;
-                OnPropertyChanged("Last");
-            }
-        } // указатель на последний заказ
-        public Product Prev
-        {
-            get { return prev; }
-            set
-            {
-                prev = value;
-                OnPropertyChanged("Prev");
-            }
-        }// указатель на предыдущий заказ
         public Order(string lastName) // конструктор 
         {
             LastName = lastName;
             Date = DateTime.Now; // установка текущей даты и времени 
             ProductCount = 0;
             Head = new Product("", 0); // создание заголовка
-            Last = null;
-            Prev = Head;
+            last = null;
+            prev = Head;
         }
         public void AddProduct(string name, int price) // добавление товара
         {
@@ -85,7 +67,7 @@ namespace Oasmal_3step
             if (ProductCount == 0) // если заказ пуст
             { // добавляем в начало
                 Head.Next = product;
-                Last = product;
+                last = product;
             }
             else // иначе
             {
@@ -108,8 +90,8 @@ namespace Oasmal_3step
 
                 if (check) // если нужно добавлять в конец
                 {//добавляем
-                    Last.Next = product;
-                    Last = product;
+                    last.Next = product;
+                    last = product;
                 }
             }
             ProductCount++; // увеличиваем счетчик 
@@ -123,17 +105,17 @@ namespace Oasmal_3step
                 {
                     return false; // возвращаем ложь
                 }
-                else if (current != Last) // если есть
+                else if (current != last) // если есть
                 {//удаляем с изменением указателей
-                    Prev.Next = current.Next;
+                    prev.Next = current.Next;
                     current = null;
                     ProductCount--; // уменьшаем счетчик
                     return true;
                 }
                 else // если есть и это последний товар
                 { //удаляем с изменением указателей на Last 
-                    Last = Prev;
-                    Last.Next = null;
+                    last = prev;
+                    last.Next = null;
                     current = null;
                     ProductCount--;// уменьшаем счетчик
                     return true;
@@ -150,7 +132,7 @@ namespace Oasmal_3step
                     return current; // возвращаем
                 else // иначе, идем дальше
                 {
-                    Prev = current;
+                    prev = current;
                     current = current.Next;
                 }
             }

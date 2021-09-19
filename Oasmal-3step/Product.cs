@@ -25,7 +25,7 @@ namespace Oasmal_3step
                 OnPropertyChanged("Price");
             }
         }
-        internal Product Next
+        public Product Next
         {
             get => next;
             set

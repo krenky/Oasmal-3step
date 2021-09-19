@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using Microsoft.Win32;
+using System.IO;
+using System.Text.Json;
 
 namespace Oasmal_3step
 {
@@ -63,6 +66,18 @@ namespace Oasmal_3step
             Order order = shop.FindOrder(DataOrders.SelectedItem as Order);
             order.DeleteProduct(product.Name);
             DataProducts.ItemsSource = order?.GetProduct();
+        }
+
+        private void SaveFile_Click(object sender, RoutedEventArgs e)
+        {
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                if ((bool)saveFileDialog.ShowDialog())
+                    using (FileStream fs = (FileStream)saveFileDialog.OpenFile())
+                    {
+                        JsonSerializer.Serialize<ObservableCollection<Order>>(new Utf8JsonWriter(fs), Orders);
+                    }
+            }
         }
     }
 }
