@@ -27,51 +27,51 @@ namespace Oasmal_3step
         public MainWindow()
         {
             InitializeComponent();
-            DataOrders.ItemsSource = Orders;         //Подключение коллекций данных к DataGrid
-            DataProducts.ItemsSource = products;     //Подключение коллекций данных к DataGrid
+            DataOrders.ItemsSource = Orders;
+            DataProducts.ItemsSource = products;
         }
         Shop shop = new Shop(10);
-        ObservableCollection<Order> Orders = new ObservableCollection<Order>();         //Создание коллекции ObservableCollection
-        ObservableCollection<Product> products = new ObservableCollection<Product>();   //Создание коллекции ObservableCollection
+        ObservableCollection<Order> Orders = new ObservableCollection<Order>();
+        ObservableCollection<Product> products = new ObservableCollection<Product>();
 
         private void AddOrder_Click(object sender, RoutedEventArgs e)
         {
-            Order order = new Order(TextBoxName.Text); //Создание объекта класса Заказ
-            shop.AddOrder(order); //Добавление объекта в коллекцию
-            Orders.Add(order);    //Добавление объекта в коллекцию
+            Order order = new Order(TextBoxName.Text);
+            shop.AddOrder(order);
+            Orders.Add(order);
         }
 
         private void DelOrder_Click(object sender, RoutedEventArgs e)
         {
-            Order order = DataOrders.SelectedItem as Order;//получение объекта из DataGrid
-            Orders.Remove(order); //удаление выбранного объекта
+            Order order = DataOrders.SelectedItem as Order;
+            Orders.Remove(order);
         }
 
         private void DataOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (DataOrders.SelectedItem != null)
             {
-                Order order = shop.FindOrder(DataOrders.SelectedItem as Order);//поиск выбранного объекта в коллекции
-                DataProducts.ItemsSource = order?.GetProduct(); //Подключение коллекций данных к DataGrid
+                Order order = shop.FindOrder(DataOrders.SelectedItem as Order);
+                DataProducts.ItemsSource = order?.GetProduct();
             }
         }
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
-            Order order = shop.FindOrder(DataOrders.SelectedItem as Order);//поиск выбранного объекта в коллекции
-            order.AddProduct(TextBoxProduct.Text, Convert.ToInt32(TextBoxPriceProduct.Text));//добавление продукта в заказ
-            DataProducts.ItemsSource = order?.GetProduct();//Подключение коллекций данных к DataGrid
+            Order order = shop.FindOrder(DataOrders.SelectedItem as Order);
+            order.AddProduct(TextBoxProduct.Text, Convert.ToInt32(TextBoxPriceProduct.Text));
+            DataProducts.ItemsSource = order?.GetProduct();
         }
 
         private void DeleteProduct_Click(object sender, RoutedEventArgs e)
         {
-            Product product = DataProducts.SelectedItem as Product;//получение объекта из DataGrid
-            Order order = shop.FindOrder(DataOrders.SelectedItem as Order);//поиск выбранного объекта в коллекции
-            order.DeleteProduct(product.Name);//удаление продукта из выбранного заказа
-            DataProducts.ItemsSource = order?.GetProduct();//Подключение коллекций данных к DataGrid
+            Product product = DataProducts.SelectedItem as Product;
+            Order order = shop.FindOrder(DataOrders.SelectedItem as Order);
+            order.DeleteProduct(product.Name);
+            DataProducts.ItemsSource = order?.GetProduct();
         }
 
-        private void SaveFile_Click(object sender, RoutedEventArgs e)//Метод сохранения
+        private void SaveFile_Click(object sender, RoutedEventArgs e)
         {
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -83,7 +83,7 @@ namespace Oasmal_3step
             }
         }
 
-        private async void LoadFile_ClickAsync(object sender, RoutedEventArgs e)//метод загрузки
+        private async void LoadFile_ClickAsync(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if ((bool)openFileDialog.ShowDialog())
@@ -108,37 +108,37 @@ namespace Oasmal_3step
 
         }
 
-        private void TextBoxName_PreviewTextInput(object sender, TextCompositionEventArgs e)  //метод для ограничения вводимой информации         
-        {                                                                                              
-            e.Handled = !(Char.IsLetter(e.Text, 0));                                                   
-        }                                                                                              
-                                                                                                       
-        private void TextBoxName_PreviewKeyDown(object sender, KeyEventArgs e)   //метод для ограничения вводимой информации                      
-        {                                                                                              
-            if (e.Key == Key.Space)                                                                    
-                e.Handled = true;                                                                      
-        }                                                                                              
-                                                                                                       
-        private void TextBoxProduct_PreviewTextInput(object sender, TextCompositionEventArgs e)  //метод для ограничения вводимой информации      
-        {                                                                                              
-            e.Handled = !(Char.IsLetter(e.Text, 0));                                                   
-        }                                                                                              
-                                                                                                       
-        private void TextBoxProduct_PreviewKeyDown(object sender, KeyEventArgs e)   //метод для ограничения вводимой информации                   
-        {                                                                                              
-            if (e.Key == Key.Space)                                                                    
-                e.Handled = true;                                                                      
-        }                                                                                              
-                                                                                                       
-        private void TextBoxPriceProduct_PreviewKeyDown(object sender, KeyEventArgs e)  //метод для ограничения вводимой информации               
-        {                                                                                              
-            if (e.Key == Key.Space)                                                                    
-                e.Handled = true;                                                                      
-        }                                                                                              
-                                                                                                       
-        private void TextBoxPriceProduct_PreviewTextInput(object sender, TextCompositionEventArgs e) //метод для ограничения вводимой информации
-        {                                                                                              
-            e.Handled = !(Char.IsDigit(e.Text, 0));                                                    
-        }                                                                                              
+        private void TextBoxName_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !(Char.IsLetter(e.Text, 0));
+        }
+
+        private void TextBoxName_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+                e.Handled = true;
+        }
+
+        private void TextBoxProduct_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !(Char.IsLetter(e.Text, 0));
+        }
+
+        private void TextBoxProduct_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+                e.Handled = true;
+        }
+
+        private void TextBoxPriceProduct_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+                e.Handled = true;
+        }
+
+        private void TextBoxPriceProduct_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !(Char.IsDigit(e.Text, 0));
+        }
     }
 }
